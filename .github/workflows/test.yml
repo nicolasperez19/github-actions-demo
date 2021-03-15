@@ -1,25 +1,13 @@
 name: CI/CD Workflow
 
-on: 
-  push:
-  pull_request:
+on: [ push, pull_request]
 
 jobs:
   test:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-    
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-$${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      
+            
       - name: Install six
         run: pip install six
       
